@@ -460,23 +460,23 @@ async def favicon():
         import io
         import zipfile
         from fastapi.responses import StreamingResponse
-        
+
         try:
             # Create in-memory zip file
             zip_buffer = io.BytesIO()
-            
+
             with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
                 # Export request logs
                 conn = sqlite3.connect(str(DB_PATH))
                 conn.row_factory = sqlite3.Row
                 cursor = conn.cursor()
-                
+
                 # Get all request logs
                 cursor.execute('''
                     SELECT * FROM request_logs ORDER BY created_at DESC
                 ''')
                 logs = cursor.fetchall()
-                
+
                 # Convert to JSON
                 logs_data = []
                 for row in logs:
@@ -487,10 +487,10 @@ async def favicon():
                         except:
                             pass
                     logs_data.append(log_entry)
-                
+
                 # Add logs to zip
                 zip_file.writestr("request_logs.json", json.dumps(logs_data, indent=2))
-                
+
                 # Export performance metrics if available
                 try:
                     cursor.execute('SELECT * FROM performance_metrics ORDER BY recorded_at DESC')
@@ -498,7 +498,7 @@ async def favicon():
                     zip_file.writestr("performance_metrics.json", json.dumps(metrics, indent=2))
                 except:
                     pass
-                
+
                 # Export test sessions if available
                 try:
                     cursor.execute('SELECT * FROM test_sessions ORDER BY created_at DESC')
@@ -506,9 +506,9 @@ async def favicon():
                     zip_file.writestr("test_sessions.json", json.dumps(sessions, indent=2))
                 except:
                     pass
-                
+
                 conn.close()
-                
+
                 # Add metadata
                 metadata = {
                     "export_timestamp": time.strftime('%Y-%m-%dT%H:%M:%S%z', time.gmtime()),
@@ -521,24 +521,24 @@ async def favicon():
                     }
                 }
                 zip_file.writestr("metadata.json", json.dumps(metadata, indent=2))
-            
+
             zip_buffer.seek(0)
-            
+
             # Return as streaming response
             def iter_zip():
                 yield zip_buffer.getvalue()
-            
+
             timestamp = time.strftime('%Y%m%d_%H%M%S', time.gmtime())
             filename = f"mockloop_export_{timestamp}.zip"
-            
+
             print(f"DEBUG ADMIN: Exported {len(logs_data)} logs to {filename}")
-            
+
             return StreamingResponse(
                 iter_zip(),
                 media_type="application/zip",
                 headers={"Content-Disposition": f"attachment; filename={filename}"}
             )
-            
+
         except Exception as e:
             print(f"DEBUG ADMIN: Error exporting data: {e}")
             return {"error": str(e)}
@@ -549,11 +549,11 @@ async def favicon():
             conn = sqlite3.connect(str(DB_PATH))
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
-            
+
             # Get total count
             cursor.execute("SELECT COUNT(*) FROM request_logs")
             total_count = cursor.fetchone()[0]
-            
+
             # Get paginated logs with all available columns
             cursor.execute('''
                 SELECT id, timestamp, type, method, path, status_code, process_time_ms,
@@ -564,7 +564,7 @@ async def favicon():
                 ORDER BY created_at DESC
                 LIMIT ? OFFSET ?
             ''', (limit, offset))
-            
+
             logs = []
             for row in cursor.fetchall():
                 log_entry = {
@@ -590,11 +590,11 @@ async def favicon():
                     "created_at": row["created_at"]
                 }
                 logs.append(log_entry)
-            
+
             conn.close()
             print(f"DEBUG ADMIN: Retrieved {len(logs)} logs from database (total: {total_count})")
             return {"logs": logs, "count": total_count}
-            
+
         except Exception as e:
             print(f"DEBUG ADMIN: Error querying database: {e}")
             return {"logs": [], "count": 0, "error": str(e)}
@@ -605,27 +605,27 @@ async def favicon():
             # Get database info
             conn = sqlite3.connect(str(DB_PATH))
             cursor = conn.cursor()
-            
+
             # Check database tables and counts
             cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
             tables = [row[0] for row in cursor.fetchall()]
-            
+
             table_info = {}
             for table in tables:
                 cursor.execute(f"SELECT COUNT(*) FROM {table}")
                 count = cursor.fetchone()[0]
                 table_info[table] = count
-            
+
             # Get recent logs count
             cursor.execute("SELECT COUNT(*) FROM request_logs WHERE created_at > datetime('now', '-1 hour')")
             recent_logs = cursor.fetchone()[0]
-            
+
             # Get schema version
             cursor.execute("SELECT MAX(version) FROM schema_version")
             schema_version = cursor.fetchone()[0] or 0
-            
+
             conn.close()
-            
+
             debug_info = {
                 "status": "ok",
                 "database": {
@@ -641,13 +641,13 @@ async def favicon():
                 },
                 "timestamp": time.strftime('%Y-%m-%dT%H:%M:%S%z', time.gmtime())
             }
-            
+
             print(f"DEBUG ADMIN: Debug info retrieved successfully")
             return debug_info
-            
+
         except Exception as e:
             print(f"DEBUG ADMIN: Error getting debug info: {e}")
-            return {"status": "error", "error": str(e)}"""
+            return {"status": "error", "error": str(e)}"""  # noqa: S608
         webhook_api_endpoints_str = ""
         if webhooks_enabled_bool and admin_ui_enabled_bool:
             _webhook_api_endpoints_raw = """

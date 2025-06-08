@@ -19,6 +19,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [2.3.0] - 2025-06-08
+
+### Added
+- **🔐 SchemaPin Integration**: Revolutionary cryptographic schema verification for MCP tools
+  - ECDSA P-256 signature verification with SHA-256 hashing
+  - Trust-On-First-Use (TOFU) key pinning with automatic discovery
+  - Configurable security policies: enforce, warn, and log modes
+  - Comprehensive audit logging and compliance tracking
+  - Hybrid architecture with graceful fallback when SchemaPin library unavailable
+  - Complete integration with MockLoop's existing audit and proxy systems
+  - 56 comprehensive tests (42 unit + 14 integration tests)
+  - Extensive examples and documentation in `examples/schemapin/`
+  - New dependency: `schemapin>=1.0.0`
+- **📚 Comprehensive Documentation**: Complete SchemaPin integration guide
+  - Detailed integration guide at `docs/guides/schemapin-integration.md`
+  - Updated main README.md with SchemaPin section
+  - Migration guide for existing users
+  - Security best practices and threat analysis
+  - Troubleshooting guide and API reference
+
+### Security
+- **MCP Rug Pull Protection**: Prevents malicious schema modifications through cryptographic verification
+- **Enhanced Audit Logging**: SchemaPin verification events integrated with MockLoop's compliance system
+- **Key Pinning Security**: TOFU model prevents man-in-the-middle attacks on schema verification
+- **Policy-Based Security**: Configurable enforcement levels for different environments
+- **Compliance Support**: Audit trails support GDPR, SOX, HIPAA regulatory requirements
+
+### Changed
+- Enhanced MCP tool execution flow to include optional schema verification
+- Extended audit logging system to support SchemaPin verification events
+- Updated proxy configuration to support SchemaPin integration
+- Improved security posture with cryptographic schema verification
+
 ## [2.2.9] - 2025-06-02
 
 ### Added

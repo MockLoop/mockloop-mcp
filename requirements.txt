@@ -12,6 +12,9 @@ pyyaml
 # MCP SDK
 mcp[cli]
 
+# SchemaPin integration
+schemapin
+
 # For development (optional, can be in requirements-dev.txt)
 # pytest
 # black

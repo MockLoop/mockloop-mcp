@@ -10,6 +10,13 @@ from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
 
+# Import SchemaPin config if available
+try:
+    from ..schemapin.config import SchemaPinConfig
+except ImportError:
+    # Fallback if SchemaPin is not available
+    SchemaPinConfig = None
+
 
 class ProxyMode(Enum):
     """Proxy operation modes."""
@@ -148,6 +155,7 @@ class ProxyConfig:
     retry_count: int = 3
     rate_limit: dict[str, Any] | None = None
     headers: dict[str, str] = field(default_factory=dict)
+    schemapin_config: Any | None = None  # SchemaPinConfig when available
 
     def add_endpoint(self, endpoint: EndpointConfig) -> None:
         """Add an endpoint configuration."""
@@ -181,6 +189,7 @@ class ProxyConfig:
             "retry_count": self.retry_count,
             "rate_limit": self.rate_limit,
             "headers": self.headers,
+            "schemapin_config": self.schemapin_config.to_dict() if self.schemapin_config else None,
         }
 
     @classmethod
@@ -196,6 +205,12 @@ class ProxyConfig:
             AuthConfig.from_dict(default_auth_data) if default_auth_data else None
         )
 
+        # Handle SchemaPin config
+        schemapin_config = None
+        schemapin_data = data.get("schemapin_config")
+        if schemapin_data and SchemaPinConfig:
+            schemapin_config = SchemaPinConfig.from_dict(schemapin_data)
+
         return cls(
             api_name=data["api_name"],
             base_url=data["base_url"],
@@ -207,6 +222,7 @@ class ProxyConfig:
             retry_count=data.get("retry_count", 3),
             rate_limit=data.get("rate_limit"),
             headers=data.get("headers", {}),
+            schemapin_config=schemapin_config,
         )
 
     def save_to_file(self, file_path: str | Path) -> None:
@@ -228,6 +244,29 @@ class ProxyConfig:
             data = json.load(f)
 
         return cls.from_dict(data)
+
+    def enable_schemapin_verification(self, policy_mode: str = "warn") -> None:
+        """Enable SchemaPin verification with specified policy."""
+        if SchemaPinConfig:
+            if not self.schemapin_config:
+                self.schemapin_config = SchemaPinConfig()
+            self.schemapin_config.enabled = True
+            self.schemapin_config.policy_mode = policy_mode
+
+    def add_trusted_domain(self, domain: str) -> None:
+        """Add domain to trusted list."""
+        if SchemaPinConfig:
+            if not self.schemapin_config:
+                self.schemapin_config = SchemaPinConfig()
+            if domain not in self.schemapin_config.trusted_domains:
+                self.schemapin_config.trusted_domains.append(domain)
+
+    def set_well_known_endpoint(self, domain: str, endpoint_url: str) -> None:
+        """Set custom .well-known endpoint for domain."""
+        if SchemaPinConfig:
+            if not self.schemapin_config:
+                self.schemapin_config = SchemaPinConfig()
+            self.schemapin_config.well_known_endpoints[domain] = endpoint_url
 
 
 @dataclass

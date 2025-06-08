@@ -204,6 +204,40 @@ class DatabaseMigrator:
                     )""",
                 ],
             },
+            8: {
+                "description": "Create SchemaPin integration tables",
+                "sql": [
+                    """CREATE TABLE IF NOT EXISTS schemapin_key_pins (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        tool_id TEXT UNIQUE NOT NULL,
+                        domain TEXT NOT NULL,
+                        public_key_pem TEXT NOT NULL,
+                        pinned_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        last_verified TIMESTAMP,
+                        verification_count INTEGER DEFAULT 0,
+                        metadata TEXT,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    )""",
+                    """CREATE TABLE IF NOT EXISTS schemapin_verification_logs (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        entry_id TEXT NOT NULL,
+                        tool_id TEXT NOT NULL,
+                        domain TEXT,
+                        verification_result TEXT NOT NULL,
+                        signature_valid BOOLEAN,
+                        key_pinned BOOLEAN,
+                        policy_action TEXT,
+                        error_details TEXT,
+                        execution_time_ms REAL,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        FOREIGN KEY (entry_id) REFERENCES mcp_audit_logs (entry_id)
+                    )""",
+                    """CREATE INDEX IF NOT EXISTS idx_schemapin_tool_id ON schemapin_key_pins(tool_id)""",
+                    """CREATE INDEX IF NOT EXISTS idx_schemapin_domain ON schemapin_key_pins(domain)""",
+                    """CREATE INDEX IF NOT EXISTS idx_schemapin_verification_entry ON schemapin_verification_logs(entry_id)""",
+                    """CREATE INDEX IF NOT EXISTS idx_schemapin_verification_tool ON schemapin_verification_logs(tool_id)""",
+                ],
+            },
         }
 
     def get_current_version(self) -> int:

@@ -56,6 +56,13 @@ if __package__ is None or __package__ == "":
     from proxy.plugin_manager import PluginManager
     from proxy.proxy_handler import ProxyHandler
     from proxy.auth_handler import AuthHandler
+    from schemapin import (
+        get_schemapin_config,
+        SchemaVerificationInterceptor,
+        SchemaVerificationError,
+        PolicyAction,
+    )
+    from schemapin.verification import extract_tool_schema
 else:
     from .mcp_audit_logger import create_audit_logger
     from .mcp_prompts import (
@@ -84,6 +91,13 @@ else:
     from .proxy.plugin_manager import PluginManager
     from .proxy.proxy_handler import ProxyHandler
     from .proxy.auth_handler import AuthHandler
+    from .schemapin import (
+        get_schemapin_config,
+        SchemaVerificationInterceptor,
+        SchemaVerificationError,
+        PolicyAction,
+    )
+    from .schemapin.verification import extract_tool_schema
 
 # Configure logger for this module
 logger = logging.getLogger(__name__)
@@ -94,7 +108,7 @@ _active_test_sessions: dict[str, dict[str, Any]] = {}
 
 def mcp_tool_audit(tool_name: str):
     """
-    Decorator to add MCP audit logging to tool functions.
+    Decorator to add MCP audit logging and SchemaPin verification to tool functions.
 
     Args:
         tool_name: Name of the MCP tool being audited
@@ -122,6 +136,40 @@ def mcp_tool_audit(tool_name: str):
                         processing_purpose="automated_testing",
                         legal_basis="legitimate_interests",
                     )
+
+                # SchemaPin verification
+                schemapin_config = get_schemapin_config()
+                if schemapin_config.enabled:
+                    interceptor = SchemaVerificationInterceptor(schemapin_config)
+
+                    # Extract schema and signature from tool metadata
+                    tool_schema = extract_tool_schema(func)
+                    signature = kwargs.get('_schema_signature')
+                    domain = kwargs.get('_schema_domain')
+
+                    # Perform verification
+                    verification_result = await interceptor.verify_tool_schema(
+                        tool_name=tool_name,
+                        schema=tool_schema,
+                        signature=signature,
+                        domain=domain
+                    )
+
+                    # Handle policy decision
+                    policy_decision = await interceptor.policy_handler.evaluate_verification_result(
+                        verification_result, tool_name
+                    )
+
+                    # Enforce policy
+                    if policy_decision.action == PolicyAction.BLOCK:
+                        raise SchemaVerificationError(
+                            f"Schema verification failed for {tool_name}: {verification_result.error}"
+                        )
+                    elif policy_decision.action == PolicyAction.WARN:
+                        logger.warning(
+                            f"Schema verification warning for {tool_name}: {verification_result.error}"
+                        )
+                    # LOG mode continues execution regardless
 
                 # Execute the original function
                 result = await func(*args, **kwargs)

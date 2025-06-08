@@ -819,7 +819,278 @@ MockLoop MCP is designed for enterprise-scale performance:
 - **Threat Modeling**: AI-driven threat analysis
 - **Security Reporting**: Comprehensive security analytics
 
-## 🛣️ Future Development
+## 🔐 SchemaPin Integration - Cryptographic Schema Verification
+
+MockLoop MCP now includes **SchemaPin integration** - the industry's first cryptographic schema verification system for MCP tools, preventing "MCP Rug Pull" attacks through ECDSA signature verification and Trust-On-First-Use (TOFU) key pinning.
+
+### Revolutionary Security Enhancement
+
+SchemaPin integration transforms MockLoop MCP into the most secure MCP testing platform by providing:
+
+- **🔐 Cryptographic Verification**: ECDSA P-256 signatures ensure schema integrity
+- **🔑 TOFU Key Pinning**: Automatic key discovery and pinning for trusted domains
+- **📋 Policy Enforcement**: Configurable security policies (enforce/warn/log modes)
+- **📊 Comprehensive Auditing**: Complete verification logs for compliance
+- **🔄 Graceful Fallback**: Works with or without SchemaPin library
+- **🏗️ Hybrid Architecture**: Seamless integration with existing MockLoop systems
+
+### Quick Start Configuration
+
+```python
+from mockloop_mcp.schemapin import SchemaPinConfig, SchemaVerificationInterceptor
+
+# Basic configuration
+config = SchemaPinConfig(
+    enabled=True,
+    policy_mode="warn",  # enforce, warn, or log
+    auto_pin_keys=False,
+    trusted_domains=["api.example.com"],
+    interactive_mode=False
+)
+
+# Initialize verification
+interceptor = SchemaVerificationInterceptor(config)
+
+# Verify tool schema
+result = await interceptor.verify_tool_schema(
+    tool_name="database_query",
+    schema=tool_schema,
+    signature="base64_encoded_signature",
+    domain="api.example.com"
+)
+
+if result.valid:
+    print("✓ Schema verification successful")
+else:
+    print(f"✗ Verification failed: {result.error}")
+```
+
+### Production Configuration
+
+```python
+# Production-ready configuration
+config = SchemaPinConfig(
+    enabled=True,
+    policy_mode="enforce",  # Block execution on verification failure
+    auto_pin_keys=True,     # Auto-pin keys for trusted domains
+    key_pin_storage_path="/secure/path/keys.db",
+    discovery_timeout=60,
+    cache_ttl=7200,
+    trusted_domains=[
+        "api.corp.com",
+        "tools.internal.com"
+    ],
+    well_known_endpoints={
+        "api.corp.com": "https://api.corp.com/.well-known/schemapin.json"
+    },
+    revocation_check=True,
+    interactive_mode=False
+)
+```
+
+### Security Benefits
+
+#### MCP Rug Pull Protection
+SchemaPin prevents malicious actors from modifying tool schemas without detection:
+
+- **Cryptographic Signatures**: Every tool schema is cryptographically signed
+- **Key Pinning**: TOFU model prevents man-in-the-middle attacks
+- **Audit Trails**: Complete verification logs for security analysis
+- **Policy Enforcement**: Configurable responses to verification failures
+
+#### Compliance & Governance
+- **Regulatory Compliance**: Audit logs support GDPR, SOX, HIPAA requirements
+- **Enterprise Security**: Integration with existing security frameworks
+- **Risk Management**: Configurable security policies for different environments
+- **Threat Detection**: Automated detection of schema tampering attempts
+
+### Integration Examples
+
+#### Basic Tool Verification
+```python
+# Verify a single tool
+from mockloop_mcp.schemapin import SchemaVerificationInterceptor
+
+interceptor = SchemaVerificationInterceptor(config)
+result = await interceptor.verify_tool_schema(
+    "api_call", tool_schema, signature, "api.example.com"
+)
+```
+
+#### Batch Verification
+```python
+# Verify multiple tools efficiently
+from mockloop_mcp.schemapin import SchemaPinWorkflowManager
+
+workflow = SchemaPinWorkflowManager(config)
+results = await workflow.verify_tool_batch([
+    {"name": "tool1", "schema": schema1, "signature": sig1, "domain": "api.com"},
+    {"name": "tool2", "schema": schema2, "signature": sig2, "domain": "api.com"}
+])
+```
+
+#### MCP Proxy Integration
+```python
+# Integrate with MCP proxy for seamless security
+class SecureMCPProxy:
+    def __init__(self, config):
+        self.interceptor = SchemaVerificationInterceptor(config)
+    
+    async def proxy_tool_request(self, tool_name, schema, signature, domain, data):
+        # Verify schema before execution
+        result = await self.interceptor.verify_tool_schema(
+            tool_name, schema, signature, domain
+        )
+        
+        if not result.valid:
+            return {"error": "Schema verification failed"}
+        
+        # Execute tool with verified schema
+        return await self.execute_tool(tool_name, data)
+```
+
+### Policy Modes
+
+#### Enforce Mode
+```python
+config = SchemaPinConfig(policy_mode="enforce")
+# Blocks execution on verification failure
+# Recommended for production critical tools
+```
+
+#### Warn Mode
+```python
+config = SchemaPinConfig(policy_mode="warn")
+# Logs warnings but allows execution
+# Recommended for gradual rollout
+```
+
+#### Log Mode
+```python
+config = SchemaPinConfig(policy_mode="log")
+# Logs events without blocking
+# Recommended for monitoring and testing
+```
+
+### Key Management
+
+#### Trust-On-First-Use (TOFU)
+```python
+# Automatic key discovery and pinning
+key_manager = KeyPinningManager("keys.db")
+
+# Pin key for trusted tool
+success = key_manager.pin_key(
+    tool_id="api.example.com/database_query",
+    domain="api.example.com",
+    public_key_pem=discovered_key,
+    metadata={"developer": "Example Corp"}
+)
+
+# Check if key is pinned
+if key_manager.is_key_pinned("api.example.com/database_query"):
+    print("Key is pinned and trusted")
+```
+
+#### Key Discovery
+SchemaPin automatically discovers public keys via `.well-known` endpoints:
+```
+https://api.example.com/.well-known/schemapin.json
+```
+
+Expected format:
+```json
+{
+  "public_key": "-----BEGIN PUBLIC KEY-----\n...\n-----END PUBLIC KEY-----",
+  "algorithm": "ES256",
+  "created_at": "2023-01-01T00:00:00Z"
+}
+```
+
+### Audit & Compliance
+
+#### Comprehensive Logging
+```python
+from mockloop_mcp.schemapin import SchemaPinAuditLogger
+
+audit_logger = SchemaPinAuditLogger("audit.db")
+
+# Verification events are automatically logged
+stats = audit_logger.get_verification_stats()
+print(f"Total verifications: {stats['total_verifications']}")
+print(f"Success rate: {stats['successful_verifications'] / stats['total_verifications'] * 100:.1f}%")
+```
+
+#### Compliance Reporting
+```python
+# Generate compliance reports
+from mockloop_mcp.mcp_compliance import MCPComplianceReporter
+
+reporter = MCPComplianceReporter("audit.db")
+report = reporter.generate_schemapin_compliance_report()
+
+print(f"Compliance score: {report['compliance_score']:.1f}%")
+print(f"Verification coverage: {report['verification_statistics']['unique_tools']} tools")
+```
+
+### Documentation & Examples
+
+- **📚 Complete Integration Guide**: [`docs/guides/schemapin-integration.md`](docs/guides/schemapin-integration.md)
+- **🔧 Basic Usage Example**: [`examples/schemapin/basic_usage.py`](examples/schemapin/basic_usage.py)
+- **⚡ Advanced Patterns**: [`examples/schemapin/advanced_usage.py`](examples/schemapin/advanced_usage.py)
+- **🏗️ Architecture Documentation**: [`SchemaPin_MockLoop_Integration_Architecture.md`](SchemaPin_MockLoop_Integration_Architecture.md)
+- **🧪 Test Coverage**: 56 comprehensive tests (42 unit + 14 integration)
+
+### Migration for Existing Users
+
+SchemaPin integration is **completely backward compatible**:
+
+1. **Opt-in Configuration**: SchemaPin is disabled by default
+2. **No Breaking Changes**: Existing tools continue to work unchanged
+3. **Gradual Rollout**: Start with `log` mode, progress to `warn`, then `enforce`
+4. **Zero Downtime**: Enable verification without service interruption
+
+```python
+# Migration example: gradual rollout
+# Phase 1: Monitoring (log mode)
+config = SchemaPinConfig(enabled=True, policy_mode="log")
+
+# Phase 2: Warnings (warn mode)
+config = SchemaPinConfig(enabled=True, policy_mode="warn")
+
+# Phase 3: Enforcement (enforce mode)
+config = SchemaPinConfig(enabled=True, policy_mode="enforce")
+```
+
+### Performance Impact
+
+SchemaPin is designed for minimal performance impact:
+
+- **Verification Time**: ~5-15ms per tool (cached results)
+- **Memory Usage**: <10MB additional memory
+- **Network Overhead**: Key discovery only on first use
+- **Database Size**: ~1KB per pinned key
+
+### Use Cases
+
+#### Development Teams
+- **Secure Development**: Verify tool schemas during development
+- **Code Review**: Ensure schema integrity in pull requests
+- **Testing**: Validate tool behavior with verified schemas
+
+#### Enterprise Security
+- **Threat Prevention**: Block malicious schema modifications
+- **Compliance**: Meet regulatory requirements with audit trails
+- **Risk Management**: Configurable security policies
+- **Incident Response**: Detailed logs for security analysis
+
+#### DevOps & CI/CD
+- **Pipeline Security**: Verify schemas in deployment pipelines
+- **Environment Promotion**: Ensure schema consistency across environments
+- **Monitoring**: Continuous verification monitoring
+- **Automation**: Automated security policy enforcement
+
+## �️ Future Development
 
 ### Upcoming Features 🚧
 

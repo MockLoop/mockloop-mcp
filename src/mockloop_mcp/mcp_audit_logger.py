@@ -245,7 +245,7 @@ class MCPAuditLogger:
                                 sql_query = f"""
                                     INSERT INTO mcp_data_lineage ({columns_str})
                                     SELECT {columns_str} FROM mcp_data_lineage_backup
-                                """  # nosec B608  # noqa: S608
+                                """  # noqa: S608
                                 cursor.execute(sql_query)
 
                         # Drop backup table
