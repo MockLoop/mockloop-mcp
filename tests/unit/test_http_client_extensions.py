@@ -1,3 +1,9 @@
+# Copyright (c) 2025 Jascha Wanger / Tarnover, LLC
+# SPDX-License-Identifier: MIT
+#
+# This file is part of the MockLoop project. (https://mockloop.com)
+# You may obtain a copy of the license at https://opensource.org/licenses/MIT
+
 #!/usr/bin/env python3
 """
 Test script for the HTTP client extensions for manage_mock_data functionality.

@@ -1,3 +1,9 @@
+# Copyright (c) 2025 Jascha Wanger / Tarnover, LLC
+# SPDX-License-Identifier: MIT
+#
+# This file is part of the MockLoop project. (https://mockloop.com)
+# You may obtain a copy of the license at https://opensource.org/licenses/MIT
+
 from src.mockloop_mcp.generator import generate_mock_api
 from src.mockloop_mcp.parser import load_api_specification
 

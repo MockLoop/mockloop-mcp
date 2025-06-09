@@ -1,3 +1,9 @@
+# Copyright (c) 2025 Jascha Wanger / Tarnover, LLC
+# SPDX-License-Identifier: MIT
+#
+# This file is part of the MockLoop project. (https://mockloop.com)
+# You may obtain a copy of the license at https://opensource.org/licenses/MIT
+
 """
 Stdio MCP Server implementation with full feature parity to SSE mode.
 This module provides all tools, prompts, and resources available in SSE mode.
