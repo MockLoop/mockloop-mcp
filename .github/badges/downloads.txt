@@ -1,1 +1,1 @@
-Downloads: https://img.shields.io/badge/downloads-700-blue
+Downloads: https://img.shields.io/badge/downloads-705-blue
