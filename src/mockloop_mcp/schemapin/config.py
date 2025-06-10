@@ -55,6 +55,12 @@ class SchemaPinConfig:
     revocation_check: bool = True
     interactive_mode: bool = True
 
+    # Signing-related configuration options
+    signing_enabled: bool = False
+    default_domain: str = "localhost"
+    private_key_paths: dict[str, str] = field(default_factory=dict)  # domain -> key_path mapping
+    auto_sign_new_tools: bool = False
+
     def to_dict(self) -> dict[str, Any]:
         """Convert configuration to dictionary."""
         return {
@@ -68,6 +74,10 @@ class SchemaPinConfig:
             "trusted_domains": self.trusted_domains,
             "revocation_check": self.revocation_check,
             "interactive_mode": self.interactive_mode,
+            "signing_enabled": self.signing_enabled,
+            "default_domain": self.default_domain,
+            "private_key_paths": self.private_key_paths,
+            "auto_sign_new_tools": self.auto_sign_new_tools,
         }
 
     @classmethod
@@ -84,6 +94,10 @@ class SchemaPinConfig:
             trusted_domains=data.get("trusted_domains", []),
             revocation_check=data.get("revocation_check", True),
             interactive_mode=data.get("interactive_mode", True),
+            signing_enabled=data.get("signing_enabled", False),
+            default_domain=data.get("default_domain", "localhost"),
+            private_key_paths=data.get("private_key_paths", {}),
+            auto_sign_new_tools=data.get("auto_sign_new_tools", False),
         )
 
     def save_to_file(self, file_path: str) -> None:

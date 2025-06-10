@@ -1,0 +1,31 @@
+{
+  "domain": "mockloop.com",
+  "private_key_path": "/path/to/your/private.pem",
+  "search_paths": ["src"],
+  "force_resign": false,
+  "output_file": "signing_results.json",
+  "description": "Example configuration for batch signing MCP tools",
+  "environments": {
+    "development": {
+      "domain": "dev.mockloop.com",
+      "private_key_path": "./dev-keys/private.pem",
+      "force_resign": true
+    },
+    "staging": {
+      "domain": "staging.mockloop.com", 
+      "private_key_path": "/etc/mockloop/staging-private.pem",
+      "force_resign": false
+    },
+    "production": {
+      "domain": "mockloop.com",
+      "private_key_path": "/etc/mockloop/production-private.pem",
+      "force_resign": false
+    }
+  },
+  "usage_examples": {
+    "batch_signing": "python scripts/sign_all_schemas.py --config examples/schemapin/signing_config_example.json",
+    "single_domain": "python scripts/sign_all_schemas.py --domain mockloop.com --private-key /path/to/key.pem",
+    "with_content": "python scripts/sign_all_schemas.py --domain mockloop.com --private-key-content \"$(cat /path/to/key.pem)\"",
+    "validation": "python scripts/validate_signatures.py --config examples/schemapin/signing_config_example.json"
+  }
+}

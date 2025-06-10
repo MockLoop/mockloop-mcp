@@ -1,0 +1,181 @@
+{
+  "status": "completed",
+  "domain": "mockloop.com",
+  "total_tools": 17,
+  "signed_count": 17,
+  "skipped_count": 0,
+  "failed_count": 0,
+  "success_rate": 100.0,
+  "results": [
+    {
+      "tool_name": "validate_scenario_config",
+      "status": "signed",
+      "signature": "MEUCIHUz8WS4ShJRKGI7HcdP/P0JibazEUj+CVIORmVaUtabAiEA3c32/yRnLNEFgKgjg6+LHQZCZeczYpureKpWYNQmkVY=",
+      "domain": "mockloop.com",
+      "schema_hash": "8f8e1d422098d655da1c076afe4e2ee9f720fe53720573b14bedd08ccba9ae22",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "tool_name": "deploy_scenario",
+      "status": "signed",
+      "signature": "MEUCIQCAqAfMfcFWdm/LBqUP4suw3ymptIRYDALCOElPUQgt3QIgSaURDe9bvrPORPwhGGH5T6QIRy2AGjmnByVlL7c1KY8=",
+      "domain": "mockloop.com",
+      "schema_hash": "a69031c8ddd3d612bde40d448143b8671dab25a36ba3c217b94041d8e46fe066",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "tool_name": "switch_scenario",
+      "status": "signed",
+      "signature": "MEQCIEd9oi+lSKtgtTj644JS1HdUQDVBNhvmNIDmiKN2jie6AiBQTPglOkb0b3r/6mqH4Pqhqo3V1hJUsns5bCwH0T+SOQ==",
+      "domain": "mockloop.com",
+      "schema_hash": "22c12dd7d8c34d6b531e18454ebfa7b1f4ef12c569e1eb96bd2d2fdb43c58b5a",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "tool_name": "list_active_scenarios",
+      "status": "signed",
+      "signature": "MEUCIEVaaUylnPSNXlDd3GHvStFkg+qQw053Jk4oHzApEKc7AiEA+KTgz7jVFBlUB1wQto4il0zR3UFZM67Q5N6suGxM/LE=",
+      "domain": "mockloop.com",
+      "schema_hash": "9903b9a9f3553c4be20723f9e65b9a93872c6cd07098230a0cae799f12b36007",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "tool_name": "execute_test_plan",
+      "status": "signed",
+      "signature": "MEYCIQDc7duSdnH2bwnPxmPFJf5yNY6sxZaBqI7GGla3AHWsOAIhAPULHH4Qr9Jdy4RU7PY9jYKYxFTZhbu+PXFgt1KZxoFy",
+      "domain": "mockloop.com",
+      "schema_hash": "cbb92a77f7dd2a128bc331097dbea9ce22dea5e70fe1733ae1917cdaaa30002b",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "tool_name": "run_test_iteration",
+      "status": "signed",
+      "signature": "MEUCIQDLy8T2YwXX+Od+7sx18dHXQn72PhE5wWiI7S2IxKbjggIgfpdeGsAl09PnAhh7U9pTRcuFc50nFCXjjogOH0I5oP8=",
+      "domain": "mockloop.com",
+      "schema_hash": "e921dd2d26526ca75be5d8c0068bc3cbefebe932ecbb6575baeaf5088aacc30c",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "tool_name": "run_load_test",
+      "status": "signed",
+      "signature": "MEYCIQDQYSxV+ToQTE7d46gf+iwWSPfJo81kF0qMsOjVIUTk7wIhALlHIM65HEryl8UHMUBahrSHwmgBkcpkHS2PidBrwKox",
+      "domain": "mockloop.com",
+      "schema_hash": "bf6f90e09ee280654bf92daedca892c8bf73532725a425d156c4c239c58d5472",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "tool_name": "create_mcp_plugin",
+      "status": "signed",
+      "signature": "MEQCIDIKr6NzPLck1qj6CB5gxm4gSP6cp3YbehGQuzUftF5iAiA7vrl6aSJcZkVK1siqlpmJjnNUV6LrCf75kzvjndX/Zw==",
+      "domain": "mockloop.com",
+      "schema_hash": "71ac278b89c997cc77c6a5926160334d5b7193a544d5a8ccdd849fac38ff7daf",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "tool_name": "run_security_test",
+      "status": "signed",
+      "signature": "MEUCIQCeUTjXl/9lCoywuAFnMRlfDDO6Vglez5302GG+Pa9yxgIgTGCL1TnDn6/Wgmx9L8ddvyHaH2lmDDG2PEEoUZfZP78=",
+      "domain": "mockloop.com",
+      "schema_hash": "b31ef3492097ecb0e47ed2a6a1f006fc9c972bb6dc791667d8db201a2658cc91",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "tool_name": "analyze_test_results",
+      "status": "signed",
+      "signature": "MEYCIQChJ1ujHeYpvo/PRhodike5Hv1sdnvn9SrIB5eb9YxN0gIhAP7tHSp1FGFFH8GwpB9vVjcVNb/iNU2YizXsB29nAFOg",
+      "domain": "mockloop.com",
+      "schema_hash": "d9bfc64ea9b7755bbfaba0604b58b0ceb6268973a26cf55b3007282187935780",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "tool_name": "generate_test_report",
+      "status": "signed",
+      "signature": "MEUCIQDFx5fkb1xnWtB3TZ55F0SGeV36BPNICOr/U/DBqdhBkAIgcSgdKxAF5MEewNUPBR/Probe97NydDQUj0tSlNKrDaI=",
+      "domain": "mockloop.com",
+      "schema_hash": "0877bad6f99a805719c1de8ecae0f4f69f1b1f113b8e69bf7b0f5df1f5caf74a",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "tool_name": "compare_test_runs",
+      "status": "signed",
+      "signature": "MEUCIAskX9cN10tAPpsPWUB3Lgx+ubYxZpTjm/TsRiWSh+k/AiEA5c3DIE4ApJ9TWG7iU1eTYqnDROm3eauBgN29E9yEQcM=",
+      "domain": "mockloop.com",
+      "schema_hash": "824b696e8306080a3fa328fefd4986141e5de6f29a62ad17fa0024053dbba3f7",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "tool_name": "get_performance_metrics",
+      "status": "signed",
+      "signature": "MEUCIQDph4wQ8imHwYrwyEBvkg1S3vhTu4cjCQtVce0sH2sddwIgaM4BSWiChaCX1RsQiousTOynqEar6wO8avR1WPuUJ+s=",
+      "domain": "mockloop.com",
+      "schema_hash": "8896510cb1bd6515768aa9bb1cd0b7a0fb87e2f6cdf34dd4b99e31e867158072",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "tool_name": "create_test_session",
+      "status": "signed",
+      "signature": "MEYCIQD9qvsOZ0Y1rKx1ARTRMMWHNPsLD5QvtlUvXbPCCxJGngIhAMsZGVWNQzapqG5zhRUKGBG6rEABBgYzRh8v5wnLK67/",
+      "domain": "mockloop.com",
+      "schema_hash": "2083c530ce3a4a155ce08916e595a43111d8ffab426e9ea0780a037e97ac4ae9",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "tool_name": "end_test_session",
+      "status": "signed",
+      "signature": "MEUCIQCrGLd7r9Wj/nooh3VU3dmCF0Fsaq1TG739IT185AK1HAIgL9YwDtHqqXTV+yQhQlWOZHxpedgM3vs/cthhHtGMjP4=",
+      "domain": "mockloop.com",
+      "schema_hash": "36ce2e96b0d86d5327581bd0b7ffe24c907de0bfb6685d72a39308499ca8b7e2",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "tool_name": "schedule_test_suite",
+      "status": "signed",
+      "signature": "MEQCIAPvssDGFp6Hb80FU8NR/aarG3ObulIeWEYaSoq91LwAAiAQF0PZkAMVnplYOwZgPu+jpD7TBadXv3Ai39iu6peyqg==",
+      "domain": "mockloop.com",
+      "schema_hash": "8e7451d19eb4427780ecdaff8d63568d5f3e82868acfd26f27f386ea335ba3f7",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "tool_name": "monitor_test_progress",
+      "status": "signed",
+      "signature": "MEQCIEzfPBTPZlDM6BBUXKdMoYvQmtnd+dHqXmP8E/8fJx+3AiB/9NFTyjnusbKjvjixvnqQvAesKKt2v6wN/sY12vDshw==",
+      "domain": "mockloop.com",
+      "schema_hash": "86cf66f99854ccfedd3f2fc397d1dcd1e6259ecb009a144b065d7eb9d01c6599",
+      "signature_valid": true,
+      "file_path": "src/mockloop_mcp/mcp_tools.py",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE660YH27V+aNivWdx6hpjjLblxpq\n9o/5NKYHosF/XogUhz+Oa0FvKy2Xw1jnBbUso/daPOHkrBUpprxK6eYD9g==\n-----END PUBLIC KEY-----\n"
+    }
+  ]
+}
