@@ -1,3 +1,5 @@
+> **NOTE: We have fully implemented [SchemaPin](https://schemapin.org) to help combat questionable copies of this project on Github and elsewhere. Be sure validate you are using releases from this repo and can use SchemaPin to validate our tool schemas: https://mockloop.com/.well-known/schemapin.json**
+
 ![MockLoop](logo.png "MockLoop")
 
 # MockLoop MCP - AI-Native Testing Platform
