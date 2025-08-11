@@ -36,7 +36,7 @@ jobs:
 
     - name: Upload coverage to Codecov
       if: matrix.python-version == '3.11'
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v5
       with:
         file: ./coverage.xml
         fail_ci_if_error: false
@@ -142,7 +142,7 @@ jobs:
         echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
     - name: Download build artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         name: dist-${{ steps.version.outputs.VERSION }}
         path: dist/
@@ -209,7 +209,7 @@ jobs:
         echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
 
     - name: Download build artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         name: dist-${{ steps.version.outputs.VERSION }}
         path: dist/
@@ -282,7 +282,7 @@ jobs:
         echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
 
     - name: Download build artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         name: dist-${{ steps.version.outputs.VERSION }}
         path: dist/
