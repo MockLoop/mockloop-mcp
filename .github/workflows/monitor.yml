@@ -27,10 +27,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
@@ -62,7 +62,7 @@ jobs:
           fi
 
       - name: Upload monitoring results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: success() && hashFiles('package_stats.json') != ''
         with:
           name: package-monitoring-results
@@ -107,7 +107,7 @@ jobs:
 
       - name: Create issue for health problems
         if: steps.health_check.outputs.alert_needed == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const title = `📦 Package Health Alert: ${{ steps.monitor.outputs.health }}`;
@@ -170,7 +170,7 @@ jobs:
 
       - name: Close resolved health issues
         if: steps.health_check.outputs.alert_needed == 'false'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             // Find open health alert issues
@@ -250,10 +250,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Download monitoring results
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: package-monitoring-results
 
@@ -301,7 +301,7 @@ jobs:
           EOF
 
       - name: Upload report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: success() && hashFiles('monitoring_report.md') != ''
         with:
           name: monitoring-report
