@@ -36,6 +36,7 @@ dependencies = [
     "requests>=2.31.0",
     "aiohttp>=3.9.0",
     "mcp[cli]>=1.0.0",
+    "schemapin>=1.0.0",
 ]
 
 [project.optional-dependencies]
@@ -300,3 +301,8 @@ directory = "htmlcov"
 
 [tool.coverage.xml]
 output = "coverage.xml"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.11.11",
+]
