@@ -15,7 +15,6 @@ Usage:
 import argparse
 import ast
 import importlib.util
-import inspect
 import json
 import logging
 import os
@@ -28,8 +27,7 @@ from collections.abc import Callable
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from mockloop_mcp.schemapin.signing import SchemaSigner
-from mockloop_mcp.schemapin.decorators import extract_enhanced_tool_schema, list_signed_tools
-from mockloop_mcp.schemapin.config import SchemaPinConfig
+from mockloop_mcp.schemapin.decorators import extract_enhanced_tool_schema
 
 # Configure logging
 logging.basicConfig(

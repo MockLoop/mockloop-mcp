@@ -10,14 +10,12 @@ Tests the complete SchemaPin workflow including:
 """
 
 import asyncio
-import json
 import sqlite3
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, patch
 
-import pytest
 
 from src.mockloop_mcp.schemapin import (
     KeyPinningManager,

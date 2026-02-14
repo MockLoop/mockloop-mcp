@@ -30,10 +30,7 @@ will be implemented in Phase 2 of the AI-native testing features.
 
 import json
 import logging
-import time
-import hashlib
-from typing import Any, Optional
-from datetime import datetime, timezone
+from typing import Any
 from pathlib import Path
 
 # Handle imports for different execution contexts

@@ -19,7 +19,6 @@ try:
     from .utils.http_client import (
         MockServerClient,
         discover_running_servers,
-        check_server_connectivity,
     )
 except ImportError:
     from utils.http_client import (

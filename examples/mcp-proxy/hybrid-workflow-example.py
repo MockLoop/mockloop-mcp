@@ -16,17 +16,9 @@ based on routing rules and conditions.
 import asyncio
 import json
 import os
-from pathlib import Path
 
 # MockLoop MCP imports
 from mockloop_mcp.mcp_tools import create_mcp_plugin, execute_test_plan
-from mockloop_mcp.proxy.config import (
-    ProxyConfig,
-    AuthConfig,
-    AuthType,
-    RouteRule,
-    ProxyMode,
-)
 
 
 async def main():

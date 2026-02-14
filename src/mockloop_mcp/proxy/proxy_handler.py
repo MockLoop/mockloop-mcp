@@ -11,9 +11,8 @@ Handles API proxy requests, routing them between mock and production endpoints
 based on configuration and testing scenarios.
 """
 
-from typing import Any, Optional, Union
+from typing import Any
 import logging
-import asyncio
 from enum import Enum
 
 logger = logging.getLogger(__name__)

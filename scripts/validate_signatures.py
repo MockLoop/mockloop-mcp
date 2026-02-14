@@ -26,7 +26,6 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from mockloop_mcp.schemapin.signing import SchemaSigner
 from mockloop_mcp.schemapin.decorators import (
-    extract_enhanced_tool_schema,
     get_tool_signature,
     get_tool_domain,
     get_tool_schema,

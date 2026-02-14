@@ -11,6 +11,7 @@ Tests Phase 2 Part 1 HTTP client implementation without MCP dependencies.
 """
 
 import asyncio
+import contextlib
 from pathlib import Path
 import sys
 
@@ -28,7 +29,7 @@ async def test_http_client_extensions():
     test_server_url = "http://localhost:8000"
     client = MockServerClient(test_server_url)
 
-    try:
+    with contextlib.suppress(Exception):
         result = await client.update_response(
             endpoint_path="/api/test",
             response_data={"message": "Updated response", "test": True},
@@ -41,10 +42,8 @@ async def test_http_client_extensions():
         assert "method" in result
         assert result["endpoint_path"] == "/api/test"
         assert result["method"] == "GET"
-    except Exception:
-        pass
 
-    try:
+    with contextlib.suppress(Exception):
         test_scenario_config = {
             "name": "test-scenario",
             "description": "Test scenario for validation",
@@ -63,37 +62,29 @@ async def test_http_client_extensions():
         assert "status" in result
         assert "scenario_name" in result
         assert result["scenario_name"] == "test-scenario"
-    except Exception:
-        pass
 
-    try:
+    with contextlib.suppress(Exception):
         result = await client.switch_scenario("test-scenario")
 
         # Verify expected structure
         assert "status" in result
         assert "scenario_name" in result
         assert result["scenario_name"] == "test-scenario"
-    except Exception:
-        pass
 
-    try:
+    with contextlib.suppress(Exception):
         result = await client.list_scenarios()
 
         # Verify expected structure
         assert "status" in result
         assert "scenarios" in result
         assert "total_count" in result
-    except Exception:
-        pass
 
-    try:
+    with contextlib.suppress(Exception):
         result = await client.get_current_scenario()
 
         # Verify expected structure
         assert "status" in result
         assert "current_scenario" in result or result.get("status") == "error"
-    except Exception:
-        pass
 
 
 async def test_mock_server_manager_integration():
@@ -101,30 +92,24 @@ async def test_mock_server_manager_integration():
 
     manager = MockServerManager()
 
-    try:
+    with contextlib.suppress(Exception):
         servers = await manager.discover_running_servers(
             ports=[8000, 8001, 8002], check_health=False
         )
         for _server in servers:
             pass
-    except Exception:
-        pass
 
-    try:
+    with contextlib.suppress(Exception):
         discovery = await manager.comprehensive_discovery()
 
         assert "total_generated" in discovery
         assert "total_running" in discovery
         assert "discovery_timestamp" in discovery
-    except Exception:
-        pass
 
-    try:
+    with contextlib.suppress(Exception):
         generated_mocks = manager.discover_generated_mocks()
         for _mock in generated_mocks[:3]:  # Show first 3
             pass
-    except Exception:
-        pass
 
 
 async def test_error_handling():
@@ -133,11 +118,9 @@ async def test_error_handling():
     # Test with invalid URL
     invalid_client = MockServerClient("http://invalid-server:9999")
 
-    try:
+    with contextlib.suppress(Exception):
         result = await invalid_client.health_check()
         assert result.get("status") in ["unreachable", "error"]
-    except Exception:
-        pass
 
 
 def test_method_signatures():

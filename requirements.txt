@@ -3,14 +3,11 @@ fastapi
 uvicorn[standard]
 Jinja2
 PyYAML
-requests
-
-# Enhanced functionality dependencies
-aiohttp
-pyyaml
+requests>=2.32.4
+aiohttp>=3.12.14
 
 # MCP SDK
-mcp[cli]
+mcp[cli]>=1.10.0
 
 # SchemaPin integration
 schemapin

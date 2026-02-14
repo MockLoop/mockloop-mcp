@@ -21,13 +21,11 @@ Features:
 - JSON schema validation for outputs
 """
 
-import json
 import logging
 import time
-import uuid
 from functools import wraps
-from typing import Any, Optional, Union
-from datetime import datetime, timezone
+from typing import Any
+from datetime import datetime
 
 # Handle imports for different execution contexts
 if __package__ is None or __package__ == "":
@@ -36,7 +34,6 @@ else:
     from .mcp_audit_logger import create_audit_logger
 
 # Import FastMCP for prompt decorators
-from mcp.server.fastmcp import FastMCP
 
 # Configure logger for this module
 logger = logging.getLogger(__name__)

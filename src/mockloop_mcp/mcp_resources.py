@@ -28,10 +28,9 @@ Resource URI Format:
 import json
 import logging
 import time
-import uuid
 import hashlib
 from functools import wraps
-from typing import Any, Optional
+from typing import Any
 from datetime import datetime, timezone
 
 # Handle imports for different execution contexts
@@ -41,7 +40,6 @@ else:
     from .mcp_audit_logger import create_audit_logger
 
 # Import FastMCP for resource decorators
-from mcp.server.fastmcp import FastMCP
 
 # Configure logger for this module
 logger = logging.getLogger(__name__)

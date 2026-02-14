@@ -11,7 +11,7 @@ Manages the lifecycle and configuration of MCP plugins for API proxying.
 Supports dynamic plugin creation and management for various APIs.
 """
 
-from typing import Optional, Any
+from typing import Any
 import logging
 from pathlib import Path
 

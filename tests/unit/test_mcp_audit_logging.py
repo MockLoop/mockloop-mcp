@@ -20,21 +20,18 @@ import tempfile
 import unittest
 from datetime import datetime, timezone
 from pathlib import Path
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import MagicMock, patch
 
-import pytest
 
 # Import the modules to test
 from src.mockloop_mcp.mcp_audit_logger import (
     MCPAuditLogger,
     MCPOperationType,
-    create_audit_logger,
 )
 from src.mockloop_mcp.mcp_compliance import (
     MCPComplianceReporter,
     ComplianceRegulation,
     ReportFormat,
-    create_compliance_reporter,
 )
 from src.mockloop_mcp.database_migration import DatabaseMigrator
 
@@ -255,7 +252,7 @@ class TestMCPAuditLogger(unittest.TestCase):
             row = cursor.fetchone()
             self.assertIsNotNone(row)
             self.assertIsNotNone(row["content_hash"])
-            self.assertTrue(len(row["content_hash"]) == 64)  # SHA-256 hash length
+            self.assertEqual(len(row["content_hash"]), 64)  # SHA-256 hash length
 
     def test_query_audit_logs(self):
         """Test querying audit logs with filters."""

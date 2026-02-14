@@ -10,27 +10,24 @@ Tests cover all core SchemaPin components:
 - Error handling and graceful fallback
 """
 
-import asyncio
 import json
 import sqlite3
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, patch
 
 import pytest
 
 from src.mockloop_mcp.schemapin import (
     KeyPinningManager,
     PolicyAction,
-    PolicyDecision,
     PolicyHandler,
     SchemaPinAuditLogger,
     SchemaPinConfig,
     SchemaVerificationInterceptor,
     VerificationResult,
 )
-from src.mockloop_mcp.schemapin.config import SchemaVerificationError
 
 
 class TestSchemaPinConfig(unittest.TestCase):

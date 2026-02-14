@@ -14,7 +14,6 @@ including API keys, Bearer tokens, Basic auth, and OAuth2 flows.
 
 import asyncio
 import json
-from pathlib import Path
 
 # MockLoop MCP imports
 from mockloop_mcp.mcp_tools import create_mcp_plugin, execute_test_plan

@@ -11,7 +11,6 @@ This module provides all tools, prompts, and resources available in SSE mode.
 
 import asyncio
 import logging
-from typing import Any
 
 from mcp.server.stdio import stdio_server
 from mcp.server import Server

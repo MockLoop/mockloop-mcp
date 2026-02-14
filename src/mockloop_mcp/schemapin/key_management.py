@@ -7,7 +7,6 @@ Handles Trust-On-First-Use (TOFU) key pinning and discovery.
 import json
 import logging
 import sqlite3
-import time
 from datetime import datetime, UTC
 from pathlib import Path
 from typing import Any
@@ -87,7 +86,6 @@ class KeyPinningManager:
             except Exception as e:
                 logger.debug(f"SchemaPin key discovery failed for {domain}: {e}")
                 # Fall back to legacy implementation
-                pass
 
         # Legacy implementation
         well_known_url = f"https://{domain}/.well-known/schemapin.json"
@@ -125,7 +123,6 @@ class KeyPinningManager:
             except Exception as e:
                 logger.debug(f"SchemaPin key pinning failed: {e}")
                 # Fall back to legacy implementation
-                pass
 
         # Legacy implementation
         try:
@@ -165,7 +162,6 @@ class KeyPinningManager:
             except Exception as e:
                 logger.debug(f"SchemaPin get pinned key failed: {e}")
                 # Fall back to legacy implementation
-                pass
 
         # Legacy implementation
         try:

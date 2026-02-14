@@ -265,7 +265,6 @@ class SchemaVerificationInterceptor:
                 except Exception as schemapin_error:
                     logger.debug(f"SchemaPin signature verification failed: {schemapin_error}")
                     # Fall back to legacy verification
-                    pass
 
             # Legacy verification implementation
             # Normalize schema for consistent hashing

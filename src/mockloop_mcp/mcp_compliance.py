@@ -15,15 +15,15 @@ This module provides comprehensive compliance reporting capabilities including:
 - GDPR, CCPA, and other data privacy regulation support
 """
 
+import contextlib
 import csv
 import json
 import sqlite3
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
-from typing import Any, Optional, Union
+from typing import Any
 from dataclasses import dataclass
 from enum import Enum
-import zipfile
 import hashlib
 
 
@@ -664,7 +664,7 @@ class MCPComplianceReporter:
 
         # Check retention period
         if log.get("expires_at"):
-            try:
+            with contextlib.suppress(ValueError, TypeError):
                 expires_at = datetime.fromisoformat(
                     log["expires_at"].replace("Z", "+00:00")
                 )
@@ -683,8 +683,6 @@ class MCPComplianceReporter:
                             "regulation": "GDPR Article 5(1)(e)",
                         }
                     )
-            except (ValueError, TypeError):
-                pass
 
         return violations
 

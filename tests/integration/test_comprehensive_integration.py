@@ -11,6 +11,7 @@ Tests the complete integration of Phase 1 and Phase 2 components.
 """
 
 import asyncio
+import contextlib
 from datetime import datetime
 import json
 from pathlib import Path
@@ -51,11 +52,9 @@ class ComprehensiveIntegrationTester:
     def cleanup_test_environment(self):
         """Clean up test environment."""
         if self.server_process:
-            try:
+            with contextlib.suppress(Exception):
                 self.server_process.terminate()
                 self.server_process.wait(timeout=5)
-            except:
-                pass
 
         if self.temp_dir and self.temp_dir.exists():
             shutil.rmtree(self.temp_dir)
@@ -674,7 +673,7 @@ class ComprehensiveIntegrationTester:
             ]
 
             for i, invalid_spec in enumerate(invalid_specs):
-                try:
+                with contextlib.suppress(Exception):
                     result = await generate_mock_api_tool(
                         spec_url_or_path=json.dumps(invalid_spec)
                         if isinstance(invalid_spec, dict)
@@ -685,9 +684,6 @@ class ComprehensiveIntegrationTester:
                     if result["status"] != "error":
                         return False
 
-                except Exception:
-                    pass  # Expected to fail
-
             # Test 2: Database corruption handling
 
             # Create corrupted database
@@ -695,12 +691,10 @@ class ComprehensiveIntegrationTester:
             with open(corrupted_db_path, "w") as f:
                 f.write("This is not a valid SQLite database")
 
-            try:
+            with contextlib.suppress(Exception):
                 migrator = DatabaseMigrator(str(corrupted_db_path))
                 migrator.get_migration_status()
                 # Should handle gracefully
-            except Exception:
-                pass
 
             # Test 3: Network error handling
 

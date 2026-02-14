@@ -12,10 +12,7 @@ content validation, and audit logging integration.
 """
 
 import pytest
-import json
-import asyncio
-from unittest.mock import Mock, patch, AsyncMock
-from typing import Any
+from unittest.mock import Mock, patch
 
 # Handle imports for different execution contexts
 try:

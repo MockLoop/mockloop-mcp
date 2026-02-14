@@ -33,9 +33,9 @@ dependencies = [
     "uvicorn[standard]>=0.24.0",
     "Jinja2>=3.1.0",
     "PyYAML>=6.0",
-    "requests>=2.31.0",
-    "aiohttp>=3.9.0",
-    "mcp[cli]>=1.0.0",
+    "requests>=2.32.4",
+    "aiohttp>=3.12.14",
+    "mcp[cli]>=1.10.0",
     "schemapin>=1.0.0",
 ]
 

@@ -11,7 +11,6 @@ import time
 import uuid
 from functools import wraps
 from typing import Any, TypedDict
-from pathlib import Path
 
 # Configure logger for this module
 logger = logging.getLogger(__name__)
@@ -90,12 +89,8 @@ if __package__ is None or __package__ == "":
         get_data_validation_pack,
         get_workflow_testing_pack,
         list_scenario_packs,
-        get_scenario_pack_by_uri,
     )
     from community_scenarios import (
-        list_community_scenarios,
-        get_community_scenario,
-        refresh_community_cache,
         get_community_architecture_info,
     )
 else:
@@ -168,12 +163,8 @@ else:
         get_data_validation_pack,
         get_workflow_testing_pack,
         list_scenario_packs,
-        get_scenario_pack_by_uri,
     )
     from .community_scenarios import (
-        list_community_scenarios,
-        get_community_scenario,
-        refresh_community_cache,
         get_community_architecture_info,
     )
 
@@ -1955,7 +1946,6 @@ def main_cli():
 def main():
     """Main entry point for the mockloop-mcp CLI command."""
     import sys
-    import os
 
     # Handle version and help early for better UX
     if "--version" in sys.argv or "-V" in sys.argv:

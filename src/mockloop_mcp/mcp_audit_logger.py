@@ -13,11 +13,10 @@ Tracks tool executions, data access, compliance requirements, and performance me
 
 import json
 import sqlite3
-import time
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Union
+from typing import Any
 import hashlib
 import logging
 from enum import Enum

@@ -205,10 +205,8 @@ class VersionBumper:
                 ["git", "tag", "-a", tag_name, "-m", tag_message], check=True
             )
 
-        except subprocess.CalledProcessError:
-            pass
-        except FileNotFoundError:
-            pass
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            pass  # Git operations are optional - silently skip if not in a git repo
 
 
 def main():

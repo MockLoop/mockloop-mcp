@@ -16,7 +16,6 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 from mockloop_mcp.schemapin import (
     signed_tool,
-    SchemaSigner,
     create_test_signer,
     get_tool_signature,
     get_tool_domain,

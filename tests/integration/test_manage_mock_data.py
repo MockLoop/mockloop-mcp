@@ -40,16 +40,14 @@ async def test_manage_mock_data_tool():
         await test_tool_validation()
         return
 
-    try:
+    with contextlib.suppress(Exception):
         result = await manage_mock_data_tool(
             server_url=test_server_url, operation="list_scenarios"
         )
         assert result["operation"] == "list_scenarios"
         assert "status" in result
-    except Exception:
-        pass
 
-    try:
+    with contextlib.suppress(Exception):
         test_response_data = {
             "message": "Updated response from MCP tool",
             "timestamp": "2024-01-01T00:00:00Z",
@@ -64,10 +62,8 @@ async def test_manage_mock_data_tool():
         )
         assert result["operation"] == "update_response"
         assert "status" in result
-    except Exception:
-        pass
 
-    try:
+    with contextlib.suppress(Exception):
         test_scenario_config = {
             "name": "test-scenario-from-mcp",
             "description": "Test scenario created by MCP tool",
@@ -86,10 +82,8 @@ async def test_manage_mock_data_tool():
         )
         assert result["operation"] == "create_scenario"
         assert "status" in result
-    except Exception:
-        pass
 
-    try:
+    with contextlib.suppress(Exception):
         result = await manage_mock_data_tool(
             server_url=test_server_url,
             operation="switch_scenario",
@@ -97,23 +91,19 @@ async def test_manage_mock_data_tool():
         )
         assert result["operation"] == "switch_scenario"
         assert "status" in result
-    except Exception:
-        pass
 
 
 async def test_tool_validation():
     """Test tool validation logic without a running server."""
 
-    try:
+    with contextlib.suppress(Exception):
         result = await manage_mock_data_tool(
             server_url="http://invalid-server:9999", operation="list_scenarios"
         )
         assert result["status"] == "error"
         assert "not accessible" in result["message"]
-    except Exception:
-        pass
 
-    try:
+    with contextlib.suppress(Exception):
         result = await manage_mock_data_tool(
             server_url="http://localhost:8000",
             operation="update_response",
@@ -121,31 +111,25 @@ async def test_tool_validation():
         )
         assert result["status"] == "error"
         assert "requires endpoint_path and response_data" in result["message"]
-    except Exception:
-        pass
 
-    try:
+    with contextlib.suppress(Exception):
         result = await manage_mock_data_tool(
             server_url="http://localhost:8000", operation="invalid_operation"
         )
         assert result["status"] == "error"
         assert "Unknown operation" in result["message"]
-    except Exception:
-        pass
 
 
 async def test_tool_with_mock_server():
     """Test tool behavior when server is not available."""
 
-    try:
+    with contextlib.suppress(Exception):
         result = await manage_mock_data_tool(
             server_url="http://localhost:8000", operation="list_scenarios"
         )
         # Should handle server unavailability gracefully
         assert result["status"] == "error"
         assert "performance_metrics" in result
-    except Exception:
-        pass
 
 
 async def test_http_client_extensions():
@@ -153,37 +137,29 @@ async def test_http_client_extensions():
 
     client = MockServerClient("http://localhost:8000")
 
-    try:
+    with contextlib.suppress(Exception):
         result = await client.update_response(
             endpoint_path="/api/test", response_data={"test": "data"}
         )
         assert "status" in result
         assert "endpoint_path" in result
-    except Exception:
-        pass
 
-    try:
+    with contextlib.suppress(Exception):
         result = await client.create_scenario(
             scenario_name="test", scenario_config={"test": "config"}
         )
         assert "status" in result
         assert "scenario_name" in result
-    except Exception:
-        pass
 
-    try:
+    with contextlib.suppress(Exception):
         result = await client.switch_scenario("test-scenario")
         assert "status" in result
         assert "scenario_name" in result
-    except Exception:
-        pass
 
-    try:
+    with contextlib.suppress(Exception):
         result = await client.list_scenarios()
         assert "status" in result
         assert "scenarios" in result
-    except Exception:
-        pass
 
 
 async def test_mock_server_manager_integration():
@@ -194,12 +170,10 @@ async def test_mock_server_manager_integration():
     with contextlib.suppress(Exception):
         await manager.discover_running_servers(ports=[8000, 8001], check_health=False)
 
-    try:
+    with contextlib.suppress(Exception):
         discovery = await manager.comprehensive_discovery()
         assert "total_generated" in discovery
         assert "total_running" in discovery
-    except Exception:
-        pass
 
 
 def test_type_definitions():

@@ -12,10 +12,9 @@ validates JSON schema compliance, tests audit logging integration,
 and tests error handling and edge cases.
 """
 
-import json
 import pytest
 import asyncio
-from unittest.mock import Mock, patch, AsyncMock
+from unittest.mock import Mock, patch
 from typing import Any
 
 # Import the module under test

@@ -11,7 +11,7 @@ Configuration models and settings for the MCP proxy functionality.
 Defines data structures for proxy, authentication, and plugin configurations.
 """
 
-from typing import Any, Optional, Union
+from typing import Any
 from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path

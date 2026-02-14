@@ -11,7 +11,7 @@ Manages authentication and authorization for proxy requests,
 supporting various authentication schemes and credential management.
 """
 
-from typing import Any, Optional
+from typing import Any
 import logging
 from enum import Enum
 

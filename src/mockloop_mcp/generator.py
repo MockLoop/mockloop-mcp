@@ -5,7 +5,6 @@
 # You may obtain a copy of the license at https://opensource.org/licenses/MIT
 
 import contextlib
-import json
 from pathlib import Path
 import secrets
 import string

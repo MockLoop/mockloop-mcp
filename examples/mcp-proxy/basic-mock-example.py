@@ -14,7 +14,6 @@ and perform basic API testing with generated mock responses.
 
 import asyncio
 import json
-from pathlib import Path
 
 # MockLoop MCP imports
 from mockloop_mcp.mcp_tools import create_mcp_plugin, execute_test_plan

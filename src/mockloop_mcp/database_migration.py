@@ -504,7 +504,7 @@ if __name__ == "__main__":
     migrator = DatabaseMigrator(db_path)
 
     if command == "status":
-        status = migrator.get_migration_status()
+        _status = migrator.get_migration_status()
 
     elif command == "migrate":
         target_version = int(sys.argv[3]) if len(sys.argv) > 3 else None
@@ -521,7 +521,7 @@ if __name__ == "__main__":
     elif command == "backup":
         backup_path = sys.argv[3] if len(sys.argv) > 3 else None
         try:
-            result_path = migrator.backup_database(backup_path)
+            _result_path = migrator.backup_database(backup_path)
         except Exception:
             sys.exit(1)
 

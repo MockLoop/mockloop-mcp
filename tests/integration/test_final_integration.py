@@ -11,6 +11,7 @@ Tests core functionality without MCP server dependencies.
 """
 
 import asyncio
+import contextlib
 from datetime import datetime
 import json
 from pathlib import Path
@@ -820,15 +821,12 @@ class FinalIntegrationTester:
 
             # Test connectivity function structure
 
-            try:
+            with contextlib.suppress(Exception):
                 # This will fail but should return proper structure
                 result = await check_server_connectivity("http://invalid-server:9999")
 
                 if not isinstance(result, dict) or "status" not in result:
                     return False
-
-            except Exception:
-                pass
 
             # Test MockServerManager
 
@@ -851,7 +849,7 @@ class FinalIntegrationTester:
 
             # Test discovery functionality (structure only)
 
-            try:
+            with contextlib.suppress(Exception):
                 discovery_result = await manager.comprehensive_discovery()
 
                 if not isinstance(discovery_result, dict):
@@ -865,9 +863,6 @@ class FinalIntegrationTester:
 
                 if missing_keys:
                     return False
-
-            except Exception:
-                pass
 
             return True
 
