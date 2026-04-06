@@ -55,7 +55,7 @@ jobs:
     
     - name: Upload coverage to Codecov
       if: matrix.python-version == '3.12'
-      uses: codecov/codecov-action@v5
+      uses: codecov/codecov-action@v6
       with:
         file: ./coverage.xml
         fail_ci_if_error: false
@@ -89,7 +89,7 @@ jobs:
         python -m twine check dist/*
     
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: dist
         path: dist/
@@ -108,7 +108,7 @@ jobs:
     
     steps:
     - name: Download build artifacts
-      uses: actions/download-artifact@v7
+      uses: actions/download-artifact@v8
       with:
         name: dist
         path: dist/
