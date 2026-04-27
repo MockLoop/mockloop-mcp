@@ -1,5 +1,5 @@
 # Documentation dependencies for MkDocs
-mkdocs>=1.0.4
+mkdocs>=1.6.1
 mkdocs-material
 mkdocs-mermaid2-plugin>=1.2.1
 mkdocstrings[python]
