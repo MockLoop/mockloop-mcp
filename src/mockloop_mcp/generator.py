@@ -141,6 +141,16 @@ def _generate_mock_data_from_schema(schema: dict[str, Any]) -> Any:
     return "mock_data"
 
 
+def _merge_parameters(
+    path_parameters: list[dict[str, Any]], operation_parameters: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
+    merged: dict[tuple[Any, Any], dict[str, Any]] = {}
+    for param in path_parameters + operation_parameters:
+        if isinstance(param, dict):
+            merged[(param.get("in"), param.get("name"))] = param
+    return list(merged.values())
+
+
 def generate_mock_api(
     spec_data: dict[str, Any],
     output_base_dir: str | Path | None = None,
@@ -295,6 +305,7 @@ def generate_mock_api(
         routes_code_parts: list[str] = []
         paths = spec_data.get("paths", {})
         for path_url, methods in paths.items():
+            path_parameters = methods.get("parameters", [])
             for method, details in methods.items():
                 valid_methods = [
                     "get",
@@ -309,7 +320,9 @@ def generate_mock_api(
                 if method.lower() not in valid_methods:
                     continue
                 path_params = ""
-                parameters = details.get("parameters", [])
+                parameters = _merge_parameters(
+                    path_parameters, details.get("parameters", [])
+                )
                 path_param_list = []
                 for param in parameters:
                     if param.get("in") == "path":
