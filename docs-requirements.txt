@@ -3,4 +3,4 @@ mkdocs>=1.0.4
 mkdocs-material
 mkdocs-mermaid2-plugin>=1.2.1
 mkdocstrings[python]
-pymdown-extensions>=8.0
+pymdown-extensions>=10.21.3
