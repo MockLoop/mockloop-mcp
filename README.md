@@ -4,6 +4,8 @@
 
 # MockLoop MCP - AI-Native Testing Platform
 
+[![SafeSkill 30/100](https://img.shields.io/badge/SafeSkill-30%2F100_Blocked-red)](https://safeskill.dev/scan/mockloop-mockloop-mcp)
+
 [![PyPI version](https://img.shields.io/pypi/v/mockloop-mcp.svg)](https://pypi.org/project/mockloop-mcp/)
 [![Python versions](https://img.shields.io/pypi/pyversions/mockloop-mcp.svg)](https://pypi.org/project/mockloop-mcp/)
 [![Downloads](https://img.shields.io/pypi/dm/mockloop-mcp.svg)](https://pypi.org/project/mockloop-mcp/)
